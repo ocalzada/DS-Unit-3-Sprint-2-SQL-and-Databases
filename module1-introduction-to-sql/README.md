@@ -52,12 +52,19 @@ Use `sqlite3` to load and write queries to explore the data, and answer the
 following questions:
 
 - How many total Characters are there?
+
 - How many of each specific subclass?
+
 - How many total Items?
+
 - How many of the Items are weapons? How many are not?
+
 - How many Items does each character have? (Return first 20 rows)
+
 - How many Weapons does each character have? (Return first 20 rows)
+
 - On average, how many Items does each Character have?
+
 - On average, how many Weapons does each character have?
 
 You do not need all the tables - in particular, the `account_*`, `auth_*`,
@@ -100,6 +107,7 @@ Using the standard `sqlite3` module:
 Then write the following queries (also with `sqlite3`) to test:
 
 - Count how many rows you have - it should be 249!
+
 - How many users who reviewed at least 100 `Nature` in the category also
   reviewed at least 100 in the `Shopping` category?
 - (*Stretch*) What are the average number of reviews for each category?
