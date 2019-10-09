@@ -48,15 +48,17 @@ s1_curs.execute('SELECT COUNT (DISTINCT name) FROM charactercreator_character').
 # instantiating the sqlite3 query to a variable
 characters = s1_curs.execute('SELECT * FROM charactercreator_character;').fetchall()
 
-# taking a look at our variables
+# taking a look at the entries
 characters[0]
 
 characters[-1]
 
 len(characters)
 
+# obtaining the table schema from the sqlite3 db
 s1_curs.execute('PRAGMA table_info(charactercreator_character);').fetchall()
 
+# used the table schema info to 'create table' query
 create_character_table = """
   CREATE TABLE charactercreator_character (
     character_id SERIAL PRIMARY KEY,
@@ -70,31 +72,39 @@ create_character_table = """
     wisdom INT
   );
 """
+# executing 'create table' query in ElephantSQL
+pg_curs.execute(create_character_table)
 
-# pg_curs.execute(create_character_table)
-
+# creating 'show table' query
 show_tables = """
 SELECT *
 FROM pg_catalog.pg_tables
 WHERE schemaname != 'pg_catalog'
 AND schemaname != 'information_schema';
 """
-
+# executing 'show table' query in ElephantSQL
 pg_curs.execute(show_tables)
 
+# getting the results of the execution
 pg_curs.fetchall()
 
+# example of first entry
 characters[0]
 
+# converting first entry into a string & splicing the first column
 str(characters[0][1:])
 
+# creating an 'insert into' query example
 example_insert = """
 INSERT INTO charactercreator_character
 (name, level, exp, hp, strength, intelligence, dexterity, wisdom)
 VALUES """ + str(characters[0][1:]) + ';'
 
+# printing that example query
 print(example_insert)
 
+# creating a for loop for each character in characters list 
+# AND executing query into ElephantSQL
 for character in characters:
   insert_character = """
     INSERT INTO charactercreator_character
@@ -103,18 +113,32 @@ for character in characters:
     # print(insert_character)
   pg_curs.execute(insert_character)
 
+# executing query for contents of the 'charactercreator_character' table
+# we created & just filled in ElephantSQL
 pg_curs.execute('SELECT * FROM charactercreator_character;')
 
 pg_curs.fetchall()
 
+# closing cursor
 pg_curs.close()
 
+# commiting changes
 pg_conn.commit()
 
+#making sure our connection is still live
 pg_conn
 
+#reopening cursor to check for errors
 pg_curs = pg_conn.cursor()
 pg_curs.execute('SELECT * FROM charactercreator_character;')
 pg_characters = pg_curs.fetchall()
 
+# first row in sqlite3
 characters[0]
+
+# first row in ElephantSQL
+pg_characters[0]
+
+# verifying entries were copied correctly, use 'assert' function
+for character, pg_character in zip(characters,pg_characters):
+  assert character == pg_character
