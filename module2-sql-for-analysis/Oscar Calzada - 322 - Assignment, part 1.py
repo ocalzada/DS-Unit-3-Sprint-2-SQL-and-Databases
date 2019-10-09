@@ -1,5 +1,5 @@
 #Installing psycopg2
-!pip install psycopg2-binary
+pip install psycopg2-binary
 
 #importing libraries
 import psycopg2
@@ -29,12 +29,12 @@ pg_curs.execute('SELECT * FROM test_table;')
 pg_curs.fetchall()
 
 # getting the rpg database file from github
-!wget https://github.com/LambdaSchool/DS-Unit-3-Sprint-2-SQL-and-Databases/blob/master/module1-introduction-to-sql/rpg_db.sqlite3?raw=true
+wget https://github.com/LambdaSchool/DS-Unit-3-Sprint-2-SQL-and-Databases/blob/master/module1-introduction-to-sql/rpg_db.sqlite3?raw=true
 
-!ls -alh
+ls -alh
 
 # relabeling the rpg database
-!mv 'rpg_db.sqlite3?raw=true' rpg_db.sqlite3
+mv 'rpg_db.sqlite3?raw=true' rpg_db.sqlite3
 
 # creating a connection object with our sqlite3 db
 s1_conn = sqlite3.connect('rpg_db.sqlite3')
