@@ -19,13 +19,6 @@ def add(x,y):
 def identity(x):
     return x
 
-MONGODB credentials
-username = Admin
-password = blDzscb7iIJg8Skd
-
-# full driver from mongo
-client = pymongo.MongoClient("mongodb://admin:blDzscb7iIJg8Skd@cluster0-shard-00-00-zukxc.mongodb.net:27017,cluster0-shard-00-01-zukxc.mongodb.net:27017,cluster0-shard-00-02-zukxc.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority")
-db = client.test
 
 # check how many machines (3)
 client.nodes
