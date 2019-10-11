@@ -130,9 +130,14 @@ interview screening questions (a form you fill when applying for a job):
 
 - In the Northwind database, what is the type of relationship between the
   `Employee` and `Territory` tables?
+The relationship between `Employee` and `Territory` was one-to-many, meaning one employee assigned to many territories but not more than one distinct `territory` was assigned to more than one employee. In addition, if you join the Employee, EmployeeTerritory and Territory tables, you would see this is the case as well. Where 2 territories might be in the same city (say New York), but its territoryID is distinct for each territory (even though its the same city). Also, no two territories (and for the most part Cities as well) were assigned to the same employee.
+
 - What is a situation where a document store (like MongoDB) is appropriate, and
   what is a situation where it is not appropriate?
+  MongoDB is a nonSQL, document-oriented programing DB that is unstructured(without schema). Its approprite use includes situations where you may want to prototype or scale something fast and quickly, since it scales horizontally (i.e. uses many small computers). It should also be used to manage "big data" (TBs of data). However, mongoDB creates technical debt that will accumulate overtime and  will be paid with traning costs later. So, it's great for startups that are seeking venture capital quickly and need show a product that has "good enough" guarantees. Therefore, it's not appropriate in situations where strict ACID guarantees are required, such as atomicity, consistency, isolation, durability. Banking transactions is one case where a SQL DB is more appropriate, especially if the company is more established with many important users.
+
 - What is "NewSQL", and what is it trying to achieve?
+NewSQL is the next generation of SQl databases. It aims to bring "the best of both worlds: SQL and nonSQL DB's." NewSQL's goal is to combine the transactional ACID guarantees of SQL DB's with the horizontal scalability of nonSQL DB's.
 
 ### Part 5 - Turn it in!
 Add all the files you wrote (`demo_data.py`, `northwind.py`), as well as this
